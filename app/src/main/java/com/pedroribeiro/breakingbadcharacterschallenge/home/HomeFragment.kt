@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.pedroribeiro.breakingbadcharacterschallenge.R
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : BaseFragment() {
+
+    private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
