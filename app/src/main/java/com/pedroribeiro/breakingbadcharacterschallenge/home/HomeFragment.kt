@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.pedroribeiro.breakingbadcharacterschallenge.R
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseFragment
 import com.pedroribeiro.breakingbadcharacterschallenge.common.ItemSpaceDecoration
@@ -74,7 +75,26 @@ class HomeFragment : BaseFragment() {
                     onLoading(isLoading)
                 }
             )
+
+            error.observe(
+                this@HomeFragment,
+                Observer {
+                    onError()
+                }
+            )
         }
+    }
+
+    private fun onError() {
+        Snackbar.make(
+            requireView(),
+            "There was an error, please try again later",
+            Snackbar.LENGTH_INDEFINITE
+        )
+            .setAction(getString(R.string.retry)) {
+                viewModel.getCharacters()
+            }
+            .show()
     }
 
     private fun onLoading(isLoading: Boolean) {
