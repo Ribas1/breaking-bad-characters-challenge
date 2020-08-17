@@ -83,7 +83,32 @@ class HomeFragment : BaseFragment() {
                     onError()
                 }
             )
+
+            navigation.observe(
+                this@HomeFragment,
+                Observer { navigation ->
+                    onNavigation(navigation)
+                }
+            )
         }
+    }
+
+    private fun onNavigation(navigation: HomeViewModel.Navigation?) {
+        when (navigation) {
+            is HomeViewModel.Navigation.ToCharacterDetails -> onNavigateToCharacterDetails(
+                navigation.character
+            )
+            null -> {
+                //do nothing
+            }
+        }
+    }
+
+    private fun onNavigateToCharacterDetails(character: CharacterUiModel) {
+        val navDirection = HomeFragmentDirections.actionFromHomeToCharacterDetails(
+            character
+        )
+        navigateTo(navDirection)
     }
 
     private fun onError() {

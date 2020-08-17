@@ -1,5 +1,9 @@
 package com.pedroribeiro.breakingbadcharacterschallenge.models
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class CharacterUiModel(
     val appearance: List<Int>,
     val betterCallSaulAppearance: List<Int>,
@@ -12,7 +16,7 @@ data class CharacterUiModel(
     val occupation: List<String>,
     val portrayed: String,
     val status: CharacterStatus
-)
+) : Parcelable
 
 enum class CharacterStatus(val value: String) {
     ALIVE("Alive"), DECEASED("Deceased"), UNKNOWN("Unknown"), PRESUMED_DEAD("Presumed dead"), OTHER(

@@ -3,6 +3,7 @@ package com.pedroribeiro.breakingbadcharacterschallenge.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseViewModel
+import com.pedroribeiro.breakingbadcharacterschallenge.common.SingleLiveEvent
 import com.pedroribeiro.breakingbadcharacterschallenge.mappers.CharacterMapper
 import com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel
 import com.pedroribeiro.breakingbadcharacterschallenge.repositories.CharactersRepository
@@ -13,6 +14,9 @@ class HomeViewModel(
     private val charactersRepository: CharactersRepository,
     private val characaterMapper: CharacterMapper
 ) : BaseViewModel() {
+
+    private val _navigation = SingleLiveEvent<Navigation>()
+    val navigation: LiveData<Navigation> = _navigation
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> = _loading
@@ -40,7 +44,13 @@ class HomeViewModel(
     }
 
     fun onCharacterClicked(character: CharacterUiModel) {
+        _navigation.postValue(Navigation.ToCharacterDetails(character))
+    }
 
+    sealed class Navigation {
+        data class ToCharacterDetails(
+            val character: CharacterUiModel
+        ) : Navigation()
     }
 
 }

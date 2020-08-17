@@ -7,5 +7,5 @@
     <dimen name="item_inner_margin_small">4dp</dimen>
     <dimen name="item_space">12dp</dimen>
     <dimen name="default_margin">16dp</dimen>
-    <dimen name="progress_bar_size">32dp</dimen>
+    <dimen name="progress_bar_size">48dp</dimen>
 </resources>

@@ -9,6 +9,21 @@
         android:id="@+id/homeFragment"
         android:name="com.pedroribeiro.breakingbadcharacterschallenge.home.HomeFragment"
         android:label="Home fragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_from_home_to_character_details"
+            app:destination="@id/characterDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/characterDetailsFragment"
+        android:name="com.pedroribeiro.breakingbadcharacterschallenge.details.CharacterDetailsFragment"
+        android:label="Character Details fragment"
+        tools:layout="@layout/fragment_character_details">
+        <argument
+            android:name="character"
+            app:argType="com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel"
+            app:nullable="false" />
+    </fragment>
 
 </navigation>
