@@ -4,10 +4,7 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-class GetCharactersResponse : ArrayList<GetCharactersResponse>()
-
-@JsonClass(generateAdapter = true)
-data class GetCharactersResponseItem(
+data class BreakingBadCharacter(
     @Json(name = "appearance")
     val appearance: List<Any>,
     @Json(name = "better_call_saul_appearance")

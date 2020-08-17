@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Breaking Bad Characters Challenge</string>
+    <string name="item_character_occupation">Occupation:</string>
 </resources>

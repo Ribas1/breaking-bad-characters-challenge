@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:cardCornerRadius="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/item_character_avatar"
+            android:layout_width="@dimen/item_character_avatar_size"
+            android:layout_height="@dimen/item_character_avatar_size"
+            android:layout_marginStart="@dimen/item_default_parent_margin"
+            android:layout_marginTop="@dimen/item_default_parent_margin"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@color/colorPrimary" />
+
+        <TextView
+            android:id="@+id/item_character_name"
+            style="@style/ItemTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/item_inner_margin"
+            android:layout_marginEnd="@dimen/item_default_parent_margin"
+            android:maxLines="2"
+            app:layout_constraintBottom_toBottomOf="@id/item_character_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_character_avatar"
+            app:layout_constraintTop_toTopOf="@id/item_character_avatar"
+            tools:text="Walter White" />
+
+        <TextView
+            android:id="@+id/item_character_occupation_title"
+            style="@style/ItemOtherTitleStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_inner_margin"
+            android:text="@string/item_character_occupation"
+            app:layout_constraintStart_toStartOf="@id/item_character_avatar"
+            app:layout_constraintTop_toBottomOf="@id/item_character_avatar" />
+
+        <TextView
+            android:id="@+id/item_character_occupation"
+            style="@style/ItemOtherTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/item_inner_margin_small"
+            android:layout_marginBottom="@dimen/item_default_parent_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/item_character_avatar"
+            app:layout_constraintTop_toBottomOf="@id/item_character_occupation_title"
+            tools:text="Meth King Pin" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
