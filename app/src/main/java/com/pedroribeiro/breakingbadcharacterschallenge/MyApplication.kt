@@ -1,6 +1,7 @@
 package com.pedroribeiro.breakingbadcharacterschallenge
 
 import android.app.Application
+import com.pedroribeiro.breakingbadcharacterschallenge.di.mapperModule
 import com.pedroribeiro.breakingbadcharacterschallenge.di.networkModule
 import com.pedroribeiro.breakingbadcharacterschallenge.di.repositoryModule
 import com.pedroribeiro.breakingbadcharacterschallenge.di.viewModelModule
@@ -15,7 +16,8 @@ class MyApplication : Application() {
             modules(
                 viewModelModule,
                 networkModule,
-                repositoryModule
+                repositoryModule,
+                mapperModule
             )
         }
     }

@@ -13,17 +13,18 @@ import com.pedroribeiro.breakingbadcharacterschallenge.R
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseFragment
 import com.pedroribeiro.breakingbadcharacterschallenge.common.ItemSpaceDecoration
 import com.pedroribeiro.breakingbadcharacterschallenge.common.show
-import com.pedroribeiro.breakingbadcharacterschallenge.network.models.BreakingBadCharacter
+import com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-const val DEFAULT_SPAN_COUNT = 2
 
 class HomeFragment : BaseFragment() {
 
     private val viewModel: HomeViewModel by viewModel()
     private val charactersAdapter: CharacterAdapter by lazy {
-        CharacterAdapter()
+        CharacterAdapter { character: CharacterUiModel ->
+            viewModel.onCharacterClicked(character)
+        }
     }
 
     override fun onCreateView(
@@ -101,7 +102,7 @@ class HomeFragment : BaseFragment() {
         progress_bar.show(isLoading)
     }
 
-    private fun onGetCharacters(characters: List<BreakingBadCharacter>) {
+    private fun onGetCharacters(characters: List<CharacterUiModel>) {
         charactersAdapter.updateData(characters)
     }
 }

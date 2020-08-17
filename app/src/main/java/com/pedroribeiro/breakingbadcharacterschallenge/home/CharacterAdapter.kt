@@ -6,12 +6,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.pedroribeiro.breakingbadcharacterschallenge.R
-import com.pedroribeiro.breakingbadcharacterschallenge.network.models.BreakingBadCharacter
+import com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel
 import kotlinx.android.synthetic.main.item_character.view.*
 
-class CharacterAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
+class CharacterAdapter(
+    private val onClickListener: (CharacterUiModel) -> Unit
+) : RecyclerView.Adapter<CharacterViewHolder>() {
 
-    private var characters: MutableList<BreakingBadCharacter> = mutableListOf()
+    private var characters: MutableList<CharacterUiModel> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
         val view =
@@ -23,10 +25,10 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val character = characters[position]
-        holder.bind(character)
+        holder.bind(character, onClickListener)
     }
 
-    fun updateData(characters: List<BreakingBadCharacter>) {
+    fun updateData(characters: List<CharacterUiModel>) {
         this.characters.addAll(characters.toMutableList())
         notifyDataSetChanged()
     }
@@ -34,10 +36,16 @@ class CharacterAdapter : RecyclerView.Adapter<CharacterViewHolder>() {
 }
 
 class CharacterViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-    fun bind(character: BreakingBadCharacter) {
+    fun bind(
+        character: CharacterUiModel,
+        onClickListener: (CharacterUiModel) -> Unit
+    ) {
         itemView.item_character_name.text = character.name
         itemView.item_character_occupation.text = character.occupation[0]
         Glide.with(view).load(character.img).into(itemView.item_character_avatar)
+        itemView.setOnClickListener {
+            onClickListener(character)
+        }
     }
 
 }

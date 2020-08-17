@@ -6,7 +6,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class BreakingBadCharacter(
     @Json(name = "appearance")
-    val appearance: List<Any>,
+    val appearance: List<Int>,
     @Json(name = "better_call_saul_appearance")
     val betterCallSaulAppearance: List<Int>,
     @Json(name = "birthday")
