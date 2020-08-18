@@ -5,8 +5,8 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class CharacterUiModel(
-    val appearance: List<Int>,
-    val betterCallSaulAppearance: List<Int>,
+    val appearances: List<Int>,
+    val betterCallSaulAppearances: List<Int>,
     val birthday: String,
     val category: Category,
     val charId: Int,

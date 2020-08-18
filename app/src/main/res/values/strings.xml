@@ -2,4 +2,13 @@
     <string name="app_name">Breaking Bad Characters Challenge</string>
     <string name="item_character_occupation">Occupation:</string>
     <string name="retry">Retry</string>
+    <string name="character_details_title">Character details</string>
+    <string name="occupations">Occupation(s):</string>
+    <string name="status">Status</string>
+    <string name="nickname">Nickname</string>
+    <string name="tv_shows_details">Tv Show(s) details</string>
+    <string name="appears_in">Appears in:</string>
+    <string name="appears_in_seasons_breaking_bad">Season(s) %1$s of Breaking Bad</string>
+    <string name="appears_in_seasons_better_call_saul">Season(s) %1$s of Better Call Saul</string>
+    <string name="character_intro"> born in </string>
 </resources>
