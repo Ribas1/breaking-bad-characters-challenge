@@ -74,7 +74,27 @@ class CharacterDetailsFragment : BaseFragment() {
                     onAppearances(appearancesModel)
                 }
             )
+
+            navigation.observe(
+                this@CharacterDetailsFragment,
+                Observer { navigation ->
+                    onNavigation(navigation)
+                }
+            )
         }
+    }
+
+    private fun onNavigation(navigation: CharacterDetailsViewModel.Navigation?) {
+        when (navigation) {
+            CharacterDetailsViewModel.Navigation.Up -> onUpNavigation()
+            null -> {
+                //do nothing
+            }
+        }
+    }
+
+    private fun onUpNavigation() {
+        navigateUp()
     }
 
     private fun onAppearances(appearancesModel: CharacterDetailsViewModel.AppearancesModel) {

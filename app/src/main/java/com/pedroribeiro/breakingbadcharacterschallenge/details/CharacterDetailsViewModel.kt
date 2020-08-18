@@ -3,15 +3,19 @@ package com.pedroribeiro.breakingbadcharacterschallenge.details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseViewModel
+import com.pedroribeiro.breakingbadcharacterschallenge.common.SingleLiveEvent
 import com.pedroribeiro.breakingbadcharacterschallenge.common.replaceSquareBrackets
 
 class CharacterDetailsViewModel : BaseViewModel() {
+
+    private val _navigation = SingleLiveEvent<Navigation>()
+    val navigation: LiveData<Navigation> = _navigation
 
     private val _appearances = MutableLiveData<AppearancesModel>()
     val appearances: LiveData<AppearancesModel> = _appearances
 
     fun onUpClick() {
-        TODO("Not yet implemented")
+        _navigation.postValue(Navigation.Up)
     }
 
     fun setup(appearances: List<Int>, betterCallSaulAppearances: List<Int>) {
@@ -24,6 +28,10 @@ class CharacterDetailsViewModel : BaseViewModel() {
                 betterCallSaulAppearancesFormatted
             )
         )
+    }
+
+    sealed class Navigation {
+        object Up : Navigation()
     }
 
     data class AppearancesModel(
