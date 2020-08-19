@@ -7,13 +7,13 @@ import com.pedroribeiro.breakingbadcharacterschallenge.common.SingleLiveEvent
 import com.pedroribeiro.breakingbadcharacterschallenge.mappers.CharacterMapper
 import com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel
 import com.pedroribeiro.breakingbadcharacterschallenge.network.exceptions.SearchEmptyException
+import com.pedroribeiro.breakingbadcharacterschallenge.network.schedulers.SchedulerProvider
 import com.pedroribeiro.breakingbadcharacterschallenge.repositories.CharactersRepository
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 class HomeViewModel(
     private val charactersRepository: CharactersRepository,
-    private val characaterMapper: CharacterMapper
+    private val characaterMapper: CharacterMapper,
+    private val schedulers: SchedulerProvider
 ) : BaseViewModel() {
 
     private val _navigation = SingleLiveEvent<Navigation>()
@@ -34,8 +34,8 @@ class HomeViewModel(
                 .doOnSubscribe { _loading.postValue(true) }
                 .doFinally { _loading.postValue(false) }
                 .map { characaterMapper.mapToUiModel(it) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(schedulers.io())
+                .observeOn(schedulers.ui())
                 .subscribe({ characters ->
                     _characters.postValue(characters)
                 }, {
@@ -56,8 +56,8 @@ class HomeViewModel(
                         .doOnSubscribe { _loading.postValue(true) }
                         .doFinally { _loading.postValue(false) }
                         .map { characaterMapper.mapToUiModel(it) }
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(schedulers.io())
+                        .observeOn(schedulers.ui())
                         .subscribe({ characters ->
                             _characters.postValue(characters)
                         }, { throwable ->
