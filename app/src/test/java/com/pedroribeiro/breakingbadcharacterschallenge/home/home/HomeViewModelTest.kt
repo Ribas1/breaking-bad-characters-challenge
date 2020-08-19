@@ -1,8 +1,9 @@
-package com.pedroribeiro.breakingbadcharacterschallenge.home
+package com.pedroribeiro.breakingbadcharacterschallenge.home.home
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
+import com.pedroribeiro.breakingbadcharacterschallenge.home.HomeViewModel
 import com.pedroribeiro.breakingbadcharacterschallenge.home.utils.LifecycleOwnerUtils
 import com.pedroribeiro.breakingbadcharacterschallenge.mappers.CharacterMapper
 import com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel
@@ -30,11 +31,12 @@ class HomeViewModelTest {
 
     @Before
     fun setUp() {
-        viewModel = HomeViewModel(
-            charactersRepository,
-            charactersMapper,
-            TrampolineSchedulerProvider()
-        )
+        viewModel =
+            HomeViewModel(
+                charactersRepository,
+                charactersMapper,
+                TrampolineSchedulerProvider()
+            )
         LifecycleOwnerUtils.setupLifecycleOwner(lifecycleOwner)
     }
 
@@ -75,7 +77,11 @@ class HomeViewModelTest {
         viewModel.onCharacterClicked(mockedCharacterUiModel)
 
         verify {
-            observer.onChanged(HomeViewModel.Navigation.ToCharacterDetails(mockedCharacterUiModel))
+            observer.onChanged(
+                HomeViewModel.Navigation.ToCharacterDetails(
+                    mockedCharacterUiModel
+                )
+            )
         }
     }
 
