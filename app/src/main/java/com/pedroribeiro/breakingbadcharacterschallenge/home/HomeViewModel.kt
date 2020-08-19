@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseViewModel
 import com.pedroribeiro.breakingbadcharacterschallenge.common.SingleLiveEvent
 import com.pedroribeiro.breakingbadcharacterschallenge.mappers.CharacterMapper
+import com.pedroribeiro.breakingbadcharacterschallenge.models.BreakingBadSeason
 import com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel
 import com.pedroribeiro.breakingbadcharacterschallenge.network.exceptions.SearchEmptyException
 import com.pedroribeiro.breakingbadcharacterschallenge.network.schedulers.SchedulerProvider
@@ -12,9 +13,13 @@ import com.pedroribeiro.breakingbadcharacterschallenge.repositories.CharactersRe
 
 class HomeViewModel(
     private val charactersRepository: CharactersRepository,
-    private val characaterMapper: CharacterMapper,
-    private val schedulers: SchedulerProvider
+    private val characterMapper: CharacterMapper,
+    private val schedulers: SchedulerProvider,
+    private val seasonFilterHelper: SeasonFilterHelper
 ) : BaseViewModel() {
+
+    private var allCharacters: List<CharacterUiModel> = mutableListOf()
+    private var currentSelectedSeason: BreakingBadSeason = BreakingBadSeason.ALL
 
     private val _navigation = SingleLiveEvent<Navigation>()
     val navigation: LiveData<Navigation> = _navigation
@@ -33,10 +38,11 @@ class HomeViewModel(
             charactersRepository.getCharacters()
                 .doOnSubscribe { _loading.postValue(true) }
                 .doFinally { _loading.postValue(false) }
-                .map { characaterMapper.mapToUiModel(it) }
+                .map { characterMapper.mapToUiModel(it) }
                 .subscribeOn(schedulers.io())
                 .observeOn(schedulers.ui())
                 .subscribe({ characters ->
+                    allCharacters = characters
                     _characters.postValue(characters)
                 }, {
                     _error.postValue(Error.Generic)
@@ -55,7 +61,7 @@ class HomeViewModel(
                     charactersRepository.searchCharacter(query ?: "")
                         .doOnSubscribe { _loading.postValue(true) }
                         .doFinally { _loading.postValue(false) }
-                        .map { characaterMapper.mapToUiModel(it) }
+                        .map { characterMapper.mapToUiModel(it) }
                         .subscribeOn(schedulers.io())
                         .observeOn(schedulers.ui())
                         .subscribe({ characters ->
@@ -78,6 +84,60 @@ class HomeViewModel(
         }
     }
 
+    fun onSeasonFilterClick(season: BreakingBadSeason) {
+        if (currentSelectedSeason != season) {
+            currentSelectedSeason = season
+            when (season) {
+                BreakingBadSeason.ALL -> {
+                    _characters.postValue(allCharacters)
+                }
+                BreakingBadSeason.SEASON_1 -> {
+                    _characters.postValue(
+                        seasonFilterHelper.filterNot(
+                            season,
+                            allCharacters
+                        )
+                    )
+                }
+                BreakingBadSeason.SEASON_2 -> {
+                    _characters.postValue(
+                        seasonFilterHelper.filterNot(
+                            season,
+                            allCharacters
+                        )
+                    )
+                }
+                BreakingBadSeason.SEASON_3 -> {
+                    _characters.postValue(
+                        seasonFilterHelper.filterNot(
+                            season,
+                            allCharacters
+                        )
+                    )
+                }
+                BreakingBadSeason.SEASON_4 -> {
+                    _characters.postValue(
+                        seasonFilterHelper.filterNot(
+                            season,
+                            allCharacters
+                        )
+                    )
+                }
+                BreakingBadSeason.SEASON_5 -> {
+                    _characters.postValue(
+                        seasonFilterHelper.filterNot(
+                            season,
+                            allCharacters
+                        )
+                    )
+                }
+                BreakingBadSeason.NONE -> {
+                    //do nothing
+                }
+            }
+        }
+    }
+
     sealed class Navigation {
         data class ToCharacterDetails(
             val character: CharacterUiModel
@@ -89,5 +149,4 @@ class HomeViewModel(
         object CantSearchWhileLoadingError : Error()
         object Generic : Error()
     }
-
 }

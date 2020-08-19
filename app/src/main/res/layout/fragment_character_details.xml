@@ -8,7 +8,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="@dimen/collapsing_toolbar_size"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/character_details_avatar"
-                android:layout_width="90dp"
+                android:layout_width="@dimen/character_details_avatar"
                 android:layout_height="@dimen/character_details_avatar"
                 android:layout_gravity="center" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>

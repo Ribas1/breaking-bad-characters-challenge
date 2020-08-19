@@ -6,13 +6,13 @@ import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import com.pedroribeiro.breakingbadcharacterschallenge.MainActivity
 import com.pedroribeiro.breakingbadcharacterschallenge.R
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseFragment
 import com.pedroribeiro.breakingbadcharacterschallenge.common.ItemSpaceDecoration
 import com.pedroribeiro.breakingbadcharacterschallenge.common.show
+import com.pedroribeiro.breakingbadcharacterschallenge.models.BreakingBadSeason
 import com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -45,6 +45,28 @@ class HomeFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity() as MainActivity).setSupportActionBar(toolbar_home)
         setupRecyclerView()
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        bt_filter_all.setOnClickListener {
+            viewModel.onSeasonFilterClick(BreakingBadSeason.ALL)
+        }
+        bt_filter_season_1.setOnClickListener {
+            viewModel.onSeasonFilterClick(BreakingBadSeason.SEASON_1)
+        }
+        bt_filter_season_2.setOnClickListener {
+            viewModel.onSeasonFilterClick(BreakingBadSeason.SEASON_2)
+        }
+        bt_filter_season_3.setOnClickListener {
+            viewModel.onSeasonFilterClick(BreakingBadSeason.SEASON_3)
+        }
+        bt_filter_season_4.setOnClickListener {
+            viewModel.onSeasonFilterClick(BreakingBadSeason.SEASON_4)
+        }
+        bt_filter_season_5.setOnClickListener {
+            viewModel.onSeasonFilterClick(BreakingBadSeason.SEASON_5)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -67,8 +89,6 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setupRecyclerView() {
-        charactersAdapter.stateRestorationPolicy =
-            RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         with(rv_characters) {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = charactersAdapter

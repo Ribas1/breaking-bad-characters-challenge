@@ -17,6 +17,84 @@
         app:layout_constraintTop_toTopOf="parent"
         app:title="Breaking bad characters" />
 
+    <HorizontalScrollView
+        android:id="@+id/season_filters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin"
+        android:layout_marginTop="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:scrollbars="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_home">
+
+        <RadioGroup
+            android:id="@+id/radiogroup3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkedButton="@id/bt_filter_all"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/bt_filter_all"
+                style="@style/SeasonFilterStyle"
+                android:layout_width="70dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="@dimen/filter_inner_margin"
+                android:checked="true"
+                android:text="@string/filter_all" />
+
+            <RadioButton
+                android:id="@+id/bt_filter_season_1"
+                style="@style/SeasonFilterStyle"
+                android:layout_width="70dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="@dimen/filter_inner_margin"
+                android:checked="false"
+                android:text="@string/filter_season_1" />
+
+            <RadioButton
+                android:id="@+id/bt_filter_season_2"
+                style="@style/SeasonFilterStyle"
+                android:layout_width="70dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="@dimen/filter_inner_margin"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/filter_season_2" />
+
+            <RadioButton
+                android:id="@+id/bt_filter_season_3"
+                style="@style/SeasonFilterStyle"
+                android:layout_width="70dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="@dimen/filter_inner_margin"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/filter_season_3" />
+
+            <RadioButton
+                android:id="@+id/bt_filter_season_4"
+                style="@style/SeasonFilterStyle"
+                android:layout_width="70dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="@dimen/filter_inner_margin"
+                android:layout_weight="1"
+                android:checked="false"
+                android:text="@string/filter_season_4" />
+
+            <RadioButton
+                android:id="@+id/bt_filter_season_5"
+                style="@style/SeasonFilterStyle"
+                android:layout_width="70dp"
+                android:layout_height="28dp"
+                android:checked="false"
+                android:text="@string/filter_season_5" />
+        </RadioGroup>
+
+    </HorizontalScrollView>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_characters"
         android:layout_width="0dp"
@@ -27,7 +105,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_home"
+        app:layout_constraintTop_toBottomOf="@id/season_filters"
         app:spanCount="2"
         tools:listitem="@layout/item_character" />
 

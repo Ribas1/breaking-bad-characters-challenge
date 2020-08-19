@@ -16,4 +16,11 @@
     <string name="still_loading_error">Please wait until characters are loaded</string>
     <string name="search_error">No results for that search</string>
     <string name="reload">Reload characters</string>
+    <string name="filter">Filter</string>
+    <string name="filter_all">All</string>
+    <string name="filter_season_1">Season 1</string>
+    <string name="filter_season_2">Season 2</string>
+    <string name="filter_season_3">Season 3</string>
+    <string name="filter_season_4">Season 4</string>
+    <string name="filter_season_5">Season 5</string>
 </resources>

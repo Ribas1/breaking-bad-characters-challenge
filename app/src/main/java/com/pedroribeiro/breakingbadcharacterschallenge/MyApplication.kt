@@ -15,7 +15,8 @@ class MyApplication : Application() {
                 networkModule,
                 repositoryModule,
                 mapperModule,
-                schedulersModule
+                schedulersModule,
+                filterHelper
             )
         }
     }

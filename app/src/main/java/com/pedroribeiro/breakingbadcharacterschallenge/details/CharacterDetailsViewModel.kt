@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseViewModel
 import com.pedroribeiro.breakingbadcharacterschallenge.common.SingleLiveEvent
 import com.pedroribeiro.breakingbadcharacterschallenge.common.replaceSquareBrackets
+import com.pedroribeiro.breakingbadcharacterschallenge.models.BreakingBadSeason
 
 class CharacterDetailsViewModel : BaseViewModel() {
 
@@ -18,8 +19,9 @@ class CharacterDetailsViewModel : BaseViewModel() {
         _navigation.postValue(Navigation.Up)
     }
 
-    fun setup(appearances: List<Int>, betterCallSaulAppearances: List<Int>) {
-        val breakingBadAppearancesFormatted = appearances.toString().replaceSquareBrackets()
+    fun setup(appearances: List<BreakingBadSeason>, betterCallSaulAppearances: List<Int>) {
+        val breakingBadAppearancesFormatted =
+            appearances.map { it.value }.toList().toString().replaceSquareBrackets()
         val betterCallSaulAppearancesFormatted =
             betterCallSaulAppearances.toString().replaceSquareBrackets()
         _appearances.postValue(

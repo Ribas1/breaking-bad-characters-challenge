@@ -48,4 +48,13 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="SeasonFilterStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:button">@color/transparent</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/filter_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>
