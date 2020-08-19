@@ -11,4 +11,9 @@
     <string name="appears_in_seasons_breaking_bad">Season(s) %1$s of Breaking Bad</string>
     <string name="appears_in_seasons_better_call_saul">Season(s) %1$s of Better Call Saul</string>
     <string name="character_intro"> born in </string>
+    <string name="toolbar_search_title">Search</string>
+    <string name="generic_error">There was an error, please try again later</string>
+    <string name="still_loading_error">Please wait until characters are loaded</string>
+    <string name="search_error">No results for that search</string>
+    <string name="reload">Reload characters</string>
 </resources>

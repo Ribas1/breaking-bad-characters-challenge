@@ -11,21 +11,22 @@
         android:layout_height="@dimen/toolbar_height"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="Breaking bad characters"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Breaking bad characters" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_characters"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:clipToPadding="false"
         android:layout_marginTop="@dimen/default_margin"
+        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_home"
         app:spanCount="2"
         tools:listitem="@layout/item_character" />

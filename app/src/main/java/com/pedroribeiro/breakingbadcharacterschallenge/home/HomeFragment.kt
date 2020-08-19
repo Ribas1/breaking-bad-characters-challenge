@@ -2,13 +2,13 @@ package com.pedroribeiro.breakingbadcharacterschallenge.home
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
+import com.pedroribeiro.breakingbadcharacterschallenge.MainActivity
 import com.pedroribeiro.breakingbadcharacterschallenge.R
 import com.pedroribeiro.breakingbadcharacterschallenge.common.BaseFragment
 import com.pedroribeiro.breakingbadcharacterschallenge.common.ItemSpaceDecoration
@@ -32,6 +32,7 @@ class HomeFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -42,7 +43,27 @@ class HomeFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        (requireActivity() as MainActivity).setSupportActionBar(toolbar_home)
         setupRecyclerView()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_home, menu)
+        val search = menu.findItem(R.id.toolbar_search)
+        val searchView: SearchView = search.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                viewModel.searchCharacter(query)
+                //clearing focus for emulator testing purposes only since this callback get's triggered twice when hitting serach on the keyboard
+                searchView.clearFocus()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
 
     private fun setupRecyclerView() {
@@ -79,8 +100,8 @@ class HomeFragment : BaseFragment() {
 
             error.observe(
                 this@HomeFragment,
-                Observer {
-                    onError()
+                Observer { error ->
+                    onError(error)
                 }
             )
 
@@ -111,15 +132,41 @@ class HomeFragment : BaseFragment() {
         navigateTo(navDirection)
     }
 
-    private fun onError() {
+    private fun onError(error: HomeViewModel.Error) {
+        when (error) {
+            HomeViewModel.Error.CantSearchWhileLoadingError -> showSnackBar(getString(R.string.still_loading_error))
+            HomeViewModel.Error.Generic -> showSnackBarWithAction(
+                getString(R.string.generic_error),
+                getString(R.string.reload)
+            )
+            HomeViewModel.Error.NoSearchResults -> showSnackBarWithAction(
+                getString(R.string.search_error),
+                getString(R.string.reload)
+            )
+        }
+    }
+
+    private fun showSnackBarWithAction(
+        snackBarString: String,
+        actionString: String = getString(R.string.retry)
+    ) {
         Snackbar.make(
             requireView(),
-            "There was an error, please try again later",
+            snackBarString,
             Snackbar.LENGTH_INDEFINITE
         )
-            .setAction(getString(R.string.retry)) {
+            .setAction(actionString) {
                 viewModel.getCharacters()
             }
+            .show()
+    }
+
+    private fun showSnackBar(snackbarText: String) {
+        Snackbar.make(
+            requireView(),
+            snackbarText,
+            Snackbar.LENGTH_LONG
+        )
             .show()
     }
 

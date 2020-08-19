@@ -29,7 +29,7 @@ class CharacterAdapter(
     }
 
     fun updateData(characters: List<CharacterUiModel>) {
-        this.characters.addAll(characters.toMutableList())
+        this.characters = characters.toMutableList()
         notifyDataSetChanged()
     }
 
