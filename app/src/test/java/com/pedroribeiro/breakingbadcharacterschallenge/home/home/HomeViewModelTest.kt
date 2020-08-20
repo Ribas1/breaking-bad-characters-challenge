@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.pedroribeiro.breakingbadcharacterschallenge.home.HomeViewModel
+import com.pedroribeiro.breakingbadcharacterschallenge.home.SeasonFilterHelper
 import com.pedroribeiro.breakingbadcharacterschallenge.home.utils.LifecycleOwnerUtils
 import com.pedroribeiro.breakingbadcharacterschallenge.mappers.CharacterMapper
 import com.pedroribeiro.breakingbadcharacterschallenge.models.CharacterUiModel
@@ -27,6 +28,7 @@ class HomeViewModelTest {
     private lateinit var viewModel: HomeViewModel
     private val charactersRepository = mockk<CharactersRepository>(relaxed = true)
     private val charactersMapper = mockk<CharacterMapper>(relaxed = true)
+    private val seasonFilterHelper = mockk<SeasonFilterHelper>(relaxed = true)
     private val lifecycleOwner = mockk<LifecycleOwner>(relaxed = true)
 
     @Before
@@ -35,7 +37,8 @@ class HomeViewModelTest {
             HomeViewModel(
                 charactersRepository,
                 charactersMapper,
-                TrampolineSchedulerProvider()
+                TrampolineSchedulerProvider(),
+                seasonFilterHelper
             )
         LifecycleOwnerUtils.setupLifecycleOwner(lifecycleOwner)
     }
