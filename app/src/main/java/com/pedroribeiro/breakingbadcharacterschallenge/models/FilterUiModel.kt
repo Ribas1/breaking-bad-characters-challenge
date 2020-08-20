@@ -11,5 +11,5 @@ data class FilterUiModel(
 
 enum class BreakingBadSeason(val value: String) {
     ALL("All"), SEASON_1("Season 1"), SEASON_2("Season 2"), SEASON_3("Season 3"),
-    SEASON_4("Season 4"), SEASON_5("Season 5"), NONE("none")
+    SEASON_4("Season 4"), SEASON_5("Season 5"), NONE("None")
 }

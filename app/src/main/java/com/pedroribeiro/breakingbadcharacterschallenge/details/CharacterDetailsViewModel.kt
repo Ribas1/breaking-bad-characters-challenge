@@ -19,11 +19,14 @@ class CharacterDetailsViewModel : BaseViewModel() {
         _navigation.postValue(Navigation.Up)
     }
 
-    fun setup(appearances: List<BreakingBadSeason>, betterCallSaulAppearances: List<Int>) {
+    fun setup(
+        appearances: List<BreakingBadSeason>,
+        betterCallSaulAppearances: List<BreakingBadSeason>
+    ) {
         val breakingBadAppearancesFormatted =
             appearances.map { it.value }.toList().toString().replaceSquareBrackets()
         val betterCallSaulAppearancesFormatted =
-            betterCallSaulAppearances.toString().replaceSquareBrackets()
+            betterCallSaulAppearances.map { it.value }.toList().toString().replaceSquareBrackets()
         _appearances.postValue(
             AppearancesModel(
                 breakingBadAppearancesFormatted,

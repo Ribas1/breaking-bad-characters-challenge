@@ -20,8 +20,8 @@ class CharacterMapper {
 
     private fun mapCharacterToUiModel(breakingBadCharacter: BreakingBadCharacter) =
         CharacterUiModel(
-            mapToBreakingBadCharacterEnum(breakingBadCharacter.appearance),
-            breakingBadCharacter.betterCallSaulAppearance,
+            mapToBreakingBadSeasonEnum(breakingBadCharacter.appearance),
+            mapToBreakingBadSeasonEnum(breakingBadCharacter.betterCallSaulAppearance),
             breakingBadCharacter.birthday,
             mapToCategoryEnum(breakingBadCharacter.category),
             breakingBadCharacter.charId,
@@ -33,7 +33,7 @@ class CharacterMapper {
             mapToStatusEnum(breakingBadCharacter.status)
         )
 
-    private fun mapToBreakingBadCharacterEnum(appearances: List<Int>): List<BreakingBadSeason> {
+    private fun mapToBreakingBadSeasonEnum(appearances: List<Int>): List<BreakingBadSeason> {
         return when {
             appearances.isEmpty() -> listOf(BreakingBadSeason.NONE)
             appearances.size == BREAKING_BAD_SEASONS -> listOf(BreakingBadSeason.ALL)
